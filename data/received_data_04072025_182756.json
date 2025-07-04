@@ -1,0 +1,11 @@
+{
+    "name": "Tovino Thomas",
+    "email": "tovi@gmail.com",
+    "registered": true,
+    "items": [
+        "coffee",
+        "milk",
+        "water"
+    ],
+    "total_purchase": 100000.0
+}

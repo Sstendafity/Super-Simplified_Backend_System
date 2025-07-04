@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JSON Viewer</title>
+  <style>
+    body { font-family: 'Times New Roman', Times, serif; padding: 20px; }
+    textarea { width: 100%; height: 200px; margin-top: 10px; }
+    button { margin-top: 10px; padding: 10px 20px; }
+    pre { background: #f0f0f0; padding: 10px; }
+  </style>
+</head>
+<body>
+  <h1>JSON Viewer & Editor</h1>
+
+  <h2>Fetching Sample JSON from /send-json</h2>
+  <pre id="fetched"></pre>
+
+  <h2>Edit JSON to send to /receive-json:</h2>
+  <textarea id="jsonInput"></textarea>
+  <br>
+  <button onclick="sendJson()">Save Data</button>
+
+  <script>
+    async function fetchJson() {
+      const res = await fetch("/send-json");
+      const data = await res.json();
+      document.getElementById("fetched").textContent = JSON.stringify(data, null, 2);
+      document.getElementById("jsonInput").value = JSON.stringify(data, null, 2);
+    }
+
+    async function sendJson() {
+      const raw = document.getElementById("jsonInput").value;
+      try {
+        const response = await fetch("/receive-json", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: raw
+        });
+
+        const result = await response.json();
+        alert("JSON sent " + JSON.stringify(result));
+      } catch (err) {
+        alert("Error sending JSON: " + err.message);
+      }
+    }
+
+    fetchJson();
+  </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+    "name": "Elina Artawirya",
+    "email": "elartawirya@gmail.com",
+    "registered": true,
+    "items": [
+        "pen",
+        "book",
+        "bottle"
+    ],
+    "total_purchase": 60000.0
+}
